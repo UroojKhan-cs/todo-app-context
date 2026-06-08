@@ -21,6 +21,8 @@ export function TodoProvider( {children} ) {
         localStorage.setItem("tasks", JSON.stringify(tasks))
     }, [tasks])
 
+    
+
     const addTask = (text) => {
         if (!text.trim()) return
 

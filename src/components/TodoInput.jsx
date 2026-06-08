@@ -17,7 +17,7 @@ function TodoInput() {
 
             <input 
                 className="flex-1 px-4 py-2 rounded-xl text-black outline-none bg-white/80 placeholder-gray-500 focus:ring-2 focus:ring-pink-400 transition"
-
+            
                 value = {text}
                 onChange = { (e) => setText(e.target.value) }
                 onKeyDown={ (e) => e.key === "Enter"  && handleAdd() }

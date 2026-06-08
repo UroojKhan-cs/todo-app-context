@@ -1,9 +1,12 @@
 //  src/components/TodoItem.jsx
 
-import { useContext } from "react"
+import { useRef, useEffect, useContext } from "react"
 import { TodoContext } from "../context/TodoContext"
 
+
 function TodoItem( {task} ) {
+
+    const inputRef = useRef(null)
 
     const {
         deleteTask,
@@ -14,6 +17,12 @@ function TodoItem( {task} ) {
         editText,
         setEditText
     } = useContext(TodoContext)
+
+    useEffect( () => {
+        if (editId === task.id && inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [editId] )
 
     return (
         <li className="flex justify-between items-center bg-white/20 backdrop-blur-md border border-white/20 p-3 rounded-xl shadow-md hover:shadow-lg hover:bg-white/25 transition-all duration-300">
@@ -30,6 +39,7 @@ function TodoItem( {task} ) {
                 {/* Edit mode */}
                 {editId === task.id ? (
                     <input 
+                        ref={inputRef}
                         value={editText}
                         onChange={ (e) => setEditText(e.target.value) }
                         onKeyDown={ (e) => e.key === "Enter" && saveEdit() }
